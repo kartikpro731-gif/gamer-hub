@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GamerHub Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">🔥 FF Custom Hub</div>
+        <div class="nav-links">
+            <button id="btn-player-view" class="active">Browse Custom Matches</button>
+            <button id="btn-host-view">Host Control 🔒</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section id="player-section" class="view-section">
+            <div class="hero">
+                <h1>Free Fire Custom Tournaments</h1>
+                <p>Pay entry fees securely via UPI, secure your slot, and jump straight into action!</p>
+            </div>
+            <h2>Live Room Registrations</h2>
+            <div id="player-matches-grid" class="tournament-grid"></div>
+        </section>
+
+        <div id="payment-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal" id="close-pay-modal">&times;</span>
+                <h2>Complete Registration Payment</h2>
+                <p>Scan the official UPI code below to transfer the entry fee:</p>
+                <div class="qr-container">
+                    <img id="dynamic-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi://pay?pa=9819909265@fam&pn=GamerHub&am=50&cu=INR" alt="UPI Payment QR">
+                    <div class="upi-id">ID: 9819909265@fam</div>
+                </div>
+                <form id="payment-verify-form">
+                    <div class="form-group">
+                        <label>Player Free Fire UID</label>
+                        <input type="text" id="player-ff-uid" placeholder="e.g., 284719481" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Transaction ID / UTR Number</label>
+                        <input type="text" id="txn-id" placeholder="12-digit UPI Ref Number" required>
+                    </div>
+                    <button type="submit" class="join-btn">Submit Payment Verification</button>
+                </form>
+            </div>
+        </div>
+
+        <section id="login-section" class="view-section hidden">
+            <div class="login-card">
+                <h2>Host Identity Verification</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label>Master Host Password</label>
+                        <input type="password" id="admin-password" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="login-btn-submit">Unlock Terminal</button>
+                    <p id="login-error" style="color: #ef4444; margin-top: 15px; font-size: 0.9rem; text-align: center; display: none;">Invalid credentials.</p>
+                </form>
+            </div>
+        </section>
+
+        <section id="host-section" class="view-section hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h1>Host Management Deck</h1>
+                <button id="btn-logout" style="width: auto; padding: 8px 16px; background: #374151; border: none; color: white; border-radius: 4px; cursor: pointer;">Lock Dashboard</button>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <label>Total Entry Revenue</label>
+                    <div class="stat-val" id="total-collected">₹0.00</div>
+                </div>
+                <div class="stat-card">
+                    <label>Commission Earnings (10%)</label>
+                    <div class="stat-val text-green" id="total-commission">₹0.00</div>
+                </div>
+                <div class="stat-card">
+                    <label>Active Rooms</label>
+                    <div class="stat-val" id="active-count">0</div>
+                </div>
+            </div>
+            <div class="main-layout">
+                <div class="panel">
+                    <h2>Generate Custom Room</h2>
+                    <form id="tournament-form">
+                        <div class="form-group">
+                            <label>Custom Map / Mode Title</label>
+                            <input type="text" id="game-title" placeholder="e.g., Bermuda Rush Hour (Solo)" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Entry Fee (₹)</label>
+                            <input type="number" id="entry-fee" placeholder="50" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Max Player Slots</label>
+                            <input type="number" id="slots" placeholder="48" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Room ID</label>
+                            <input type="text" id="room-id" placeholder="e.g., 8839104" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Room Password</label>
+                            <input type="text" id="room-pass" placeholder="e.g., 1122" required>
+                        </div>
+                        <button type="submit">Deploy Room Live</button>
+                    </form>
+                </div>
+                <div class="panel">
+                    <h2>Manage Active Custom Rooms</h2>
+                    <div id="matches-container"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
